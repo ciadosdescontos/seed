@@ -5,7 +5,7 @@
 **Created:** {date}
 **Type:** Client Website
 **Client:** {name}
-**Skill Loadout:** business-context-extractor, revops-expert, ui-ux-pro-max
+**Skill Loadout:** ui-ux-pro-max, /paul:audit
 **Quality Gates:** conversion psychology checklist, mobile optimization, client approval
 
 ---
@@ -108,8 +108,6 @@
 
 | Skill | When It Fires | Purpose |
 |-------|--------------|---------|
-| business-context-extractor | Discovery | Crawl existing site for business details |
-| revops-expert | Strategy | Conversion frameworks, offer positioning |
 | ui-ux-pro-max | Build | Design system, responsive layout |
 
 ### Quality Gates

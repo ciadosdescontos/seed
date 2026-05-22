@@ -117,7 +117,6 @@ Apply any edits the user requests before writing.
 
 > "Which ecosystem tools are useful for **{type}** projects? Here are some options:"
 > - PAUL, AEGIS, Skillsmith, ui-ux-pro-max, sonarqube
-> - business-context-extractor, revops-expert, content-manager
 > - content-flywheel-strategist, geo
 >
 > "List the relevant ones with priority (required/recommended/optional)."

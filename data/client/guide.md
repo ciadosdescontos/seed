@@ -2,7 +2,7 @@
 
 ## Section 1: Business Context
 **Explore:** Who's the client? What industry? Who's the target audience? What's the brand personality? Do they have an existing site?
-**Suggest:** If they have an existing site, suggest running `business-context-extractor` to pull structured context automatically. If not, build the context from conversation: industry, audience demographics, competitive positioning.
+**Suggest:** Build the context from conversation: industry, audience demographics, competitive positioning. If they have an existing site, browse it for additional details.
 **Depth:** required
 
 ## Section 2: Competitor Analysis
@@ -32,5 +32,5 @@
 
 ## Section 7: Skill Loadout
 **Explore:** Which ecosystem tools will speed up this project? Need business context extraction? Conversion copywriting help? Design system?
-**Suggest:** Load skill-loadout.md recommendations. For most client sites: business-context-extractor (required if existing site), revops-expert (for conversion copy), ui-ux-pro-max (for design).
+**Suggest:** Load skill-loadout.md recommendations. For most client sites: ui-ux-pro-max (for design), PAUL (for structured phases).
 **Depth:** optional

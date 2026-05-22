@@ -32,5 +32,5 @@
 
 ## Section 7: Skill Loadout
 **Explore:** Which ecosystem tools help with this campaign? Content strategy? Distribution optimization? Script writing?
-**Suggest:** Load skill-loadout.md recommendations. For most campaigns: content-flywheel-strategist (for multi-platform strategy), content-manager (for pipeline tracking), revops-expert (for conversion copy).
+**Suggest:** Load skill-loadout.md recommendations. For most campaigns: content-flywheel-strategist (for multi-platform strategy).
 **Depth:** optional

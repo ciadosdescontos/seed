@@ -5,7 +5,7 @@
 **Created:** {date}
 **Type:** Content/Campaign
 **Goal:** {specific measurable objective}
-**Skill Loadout:** content-manager, revops-expert, content-flywheel-strategist
+**Skill Loadout:** content-flywheel-strategist
 **Quality Gates:** deliverables checklist complete, metrics baseline captured
 
 ---
@@ -87,8 +87,6 @@
 
 | Skill | When It Fires | Purpose |
 |-------|--------------|---------|
-| content-manager | Throughout | Pipeline tracking, status updates |
-| revops-expert | Strategy phase | Framework application (Brunson, Hormozi) |
 | content-flywheel-strategist | Post-creation | Repurposing into derivative content |
 
 ### Quality Gates
