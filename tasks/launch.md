@@ -19,6 +19,61 @@ As a builder ready to start building, I want to graduate my project and set up P
 
 <steps>
 
+<step name="detect_base" priority="early">
+## Detect BASE Version
+
+Check for BASE v2 (Rust binary) for ecosystem integration.
+
+1. Check for base binary:
+   ```bash
+   which base 2>/dev/null
+   ```
+
+2. **If base binary found:**
+   ```bash
+   base --version 2>/dev/null
+   ```
+   - If output contains a semver (e.g., "base 0.1.0") → Rust binary (v2) detected
+     - Store `base_v2_available = true`
+     - Silent pass — continue
+   - If output is empty, errors, or doesn't match semver → v1/Python detected
+     - **HARD STOP.** Display:
+       ```
+       ════════════════════════════════════════
+       ⛔ BASE v1 detected — not compatible with SEED v1.0+
+       ════════════════════════════════════════
+
+       BASE v1 (Python/MCP) is no longer supported.
+       SEED now integrates with BASE v2 (Rust) for the
+       full Agentic OS experience.
+
+       Upgrade: https://chrisai.cv/skool
+
+       SEED · Chris AI Systems
+       ════════════════════════════════════════
+       ```
+     - Do NOT proceed
+
+3. **If no base binary on PATH:**
+   - Store `base_v2_available = false`
+   - Display:
+     ```
+     ℹ️ BASE not detected. SEED works standalone, but for the
+     full Agentic OS — workspace intelligence, proactive context,
+     knowledge graph — get BASE v2: https://chrisai.cv/skool
+     ```
+   - Continue with launch (not a hard stop)
+
+4. **Additional v1 artifact check** (even if no base binary):
+   - Check for `.base/data/*.json` files (v1's JSON store):
+     ```bash
+     ls .base/data/*.json 2>/dev/null
+     ```
+   - If found: display v1 warning (same hard stop as step 2)
+
+**Note:** `base_v2_available` is passed through to the graduate delegation and to the PAUL init step so paul.toml gets domain tags if BASE is present.
+</step>
+
 <step name="run_graduation" priority="first">
 ## Run Graduation
 
@@ -62,25 +117,50 @@ Exit.
 <step name="check_paul_availability">
 ## Check PAUL Availability
 
-Check if the PAUL framework is installed:
+Check if PAUL is installed via multiple paths:
+
+1. **Skill path (preferred):**
+   ```bash
+   ls ~/.claude/commands/paul/plan.md 2>/dev/null
+   ```
+
+2. **Legacy framework path (fallback):**
+   ```bash
+   ls ~/.claude/paul-framework/ 2>/dev/null
+   ```
+
+<if condition="either path found">
+Check for v1.4+ features (paul.toml support):
 ```bash
-ls ~/.claude/paul-framework/ 2>/dev/null
+grep -l "paul.toml\|paul-toml" ~/.claude/commands/paul/*.md 2>/dev/null || grep -l "paul.toml\|paul-toml" ~/.claude/paul-framework/src/templates/*.md 2>/dev/null
 ```
 
-<if condition="paul-framework directory exists">
-PAUL is available. Proceed to headless init.
+- **If paul.toml references found:** PAUL v1.4+ detected. Pass `base_v2_available` context to PAUL init so it can set domain tags and create paul.toml (not paul.json).
+- **If not found:** PAUL pre-v1.4 detected. Display:
+  ```
+  ⚠️ PAUL detected but may be an older version. For full Agentic OS
+  integration (paul.toml, BASE v2 graph sync, domain tags), update PAUL:
+  npx paul-framework@latest
+
+  Proceeding with init using current version.
+  ```
+  Continue with init.
 </if>
 
-<if condition="paul-framework directory not found">
+<if condition="neither path found">
 Inform the user:
 
-> "PAUL isn't installed globally yet. It needs to be at `~/.claude/paul-framework/`."
+> "PAUL isn't installed yet."
 >
-> "Want to install it now? I can help set it up, or you can run `/paul:init` later after installing."
+> ```
+> Install: npx paul-framework
+> ```
+>
+> "Want to install it now, or skip PAUL for now? You can run `/paul:init` later."
 
 Wait for response.
 
-If user wants to install: guide them through installation (this is environment-specific — provide the standard setup steps).
+If user wants to install: run `npx paul-framework --global` then proceed.
 If user declines: exit gracefully with graduation-only result.
 </if>
 </step>
@@ -114,6 +194,8 @@ PAUL: Initialized with {milestone} — {N} phases
 
 Your project is ready for managed development.
 Run /paul:plan to start Phase 1.
+
+SEED v1.0 · Chris AI Systems · https://chrisai.cv/skool · https://youtube.com/@chris-ai-systems
 ```
 </step>
 

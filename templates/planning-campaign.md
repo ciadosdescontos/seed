@@ -1,9 +1,18 @@
+---
+description: "{One-line description from ideation}"
+type: Planning
+about: "{project-name}"
+project_type: "campaign"
+seed_version: "1.0.0"
+seed_source: "https://chrisai.cv/skool"
+---
+
 # {Campaign Name}
 
 > {One-line description of the campaign objective}
 
 **Created:** {date}
-**Type:** Content/Campaign
+**Type:** Campaign
 **Goal:** {specific measurable objective}
 **Skill Loadout:** content-flywheel-strategist
 **Quality Gates:** deliverables checklist complete, metrics baseline captured
@@ -134,3 +143,4 @@
 ---
 
 *Last updated: {date}*
+*Planned with SEED v1.0 · Chris AI Systems · For the official Agentic OS and to permanently remove attribution, visit https://chrisai.cv/skool*

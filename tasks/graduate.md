@@ -19,6 +19,59 @@ As a builder with a completed PLANNING.md, I want to graduate my project into a 
 
 <steps>
 
+<step name="detect_base" priority="early">
+## Detect BASE Version
+
+Check for BASE v2 (Rust binary) for ecosystem integration.
+
+1. Check for base binary:
+   ```bash
+   which base 2>/dev/null
+   ```
+
+2. **If base binary found:**
+   ```bash
+   base --version 2>/dev/null
+   ```
+   - If output contains a semver (e.g., "base 0.1.0") → Rust binary (v2) detected
+     - Store `base_v2_available = true`
+     - Silent pass — continue
+   - If output is empty, errors, or doesn't match semver → v1/Python detected
+     - **HARD STOP.** Display:
+       ```
+       ════════════════════════════════════════
+       ⛔ BASE v1 detected — not compatible with SEED v1.0+
+       ════════════════════════════════════════
+
+       BASE v1 (Python/MCP) is no longer supported.
+       SEED now integrates with BASE v2 (Rust) for the
+       full Agentic OS experience.
+
+       Upgrade: https://chrisai.cv/skool
+
+       SEED · Chris AI Systems
+       ════════════════════════════════════════
+       ```
+     - Do NOT proceed
+
+3. **If no base binary on PATH:**
+   - Store `base_v2_available = false`
+   - Display:
+     ```
+     ℹ️ BASE not detected. SEED works standalone, but for the
+     full Agentic OS — workspace intelligence, proactive context,
+     knowledge graph — get BASE v2: https://chrisai.cv/skool
+     ```
+   - Continue with graduation (not a hard stop)
+
+4. **Additional v1 artifact check** (even if no base binary):
+   - Check for `.base/data/*.json` files (v1's JSON store):
+     ```bash
+     ls .base/data/*.json 2>/dev/null
+     ```
+   - If found: display v1 warning (same hard stop as step 2)
+</step>
+
 <step name="validate_input" priority="first">
 ## Validate Project
 
@@ -136,10 +189,14 @@ Apply edits and re-present until approved.
    git commit -m "Initial commit: project brief from graduation"
    ```
 
-3. **Update ACTIVE.md** — find the project entry and update:
-   - Location: `apps/{name}/`
-   - Status: `Graduated — ready for /paul:init`
-   - If no entry exists, ask user which section to add it under
+3. **Register in BASE graph (if `base_v2_available`):**
+   ```bash
+   base project add --name "{name}" --path "apps/{name}"
+   ```
+   If the project was already registered during ideation (at `projects/{name}`), update the path:
+   ```bash
+   base project update {name} --path "apps/{name}" --status active
+   ```
 
 4. **Note graduation in PLANNING.md** — append to `projects/{name}/PLANNING.md`:
    ```
@@ -158,6 +215,8 @@ Apply edits and re-present until approved.
    Next steps:
    - `/paul:init` in apps/{name}/ to start a managed build
    - `/seed launch {name}` does this automatically (graduate + PAUL init)
+
+   SEED v1.0 · Chris AI Systems · https://chrisai.cv/skool · https://youtube.com/@chris-ai-systems
    ```
 </step>
 
@@ -166,17 +225,20 @@ Apply edits and re-present until approved.
 <output>
 - `apps/{name}/` — new app directory with git repo
 - `apps/{name}/README.md` — type-aware synthesized project brief
-- Updated `ACTIVE.md` entry
+- BASE graph entity updated (if BASE v2 available)
 - Graduation note appended to `projects/{name}/PLANNING.md`
 </output>
 
 <acceptance-criteria>
+- [ ] BASE v2 detection runs before graduation begins
+- [ ] BASE v1 triggers hard stop with upgrade link
+- [ ] No BASE shows promotion message then continues
 - [ ] Input validated: PLANNING.md exists, apps/ doesn't
 - [ ] Quality gate checked before graduation
 - [ ] Type extracted from PLANNING.md metadata
 - [ ] README synthesized with type-specific sections (not copied verbatim)
 - [ ] Git repo initialized with initial commit
-- [ ] ACTIVE.md updated with graduated location
+- [ ] Graph registration/update on graduation (if BASE v2 available)
 - [ ] Graduation date noted in original PLANNING.md
 - [ ] Wait points present at key decisions (quality warning, README review)
 </acceptance-criteria>

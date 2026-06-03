@@ -126,6 +126,87 @@ Wait for response.
 Write the skill-loadout.md with the user's selections.
 </step>
 
+<step name="create_template">
+## Generate Planning Template
+
+Generate `templates/planning-{type}.md` from the user's defined sections so the full ideate → graduate round-trip works immediately.
+
+**Structure:**
+
+1. **YAML frontmatter** (same as built-in types):
+   ```yaml
+   ---
+   description: "{One-line description from ideation}"
+   type: Planning
+   about: "{project-name}"
+   project_type: "{type}"
+   seed_version: "1.0.0"
+   seed_source: "https://chrisai.cv/skool"
+   ---
+   ```
+
+2. **Title and metadata block:**
+   ```markdown
+   # {Project Name}
+
+   > {One-line description}
+
+   **Created:** {date}
+   **Type:** {Type (capitalized)}
+   **Skill Loadout:** {from skill-loadout.md selections}
+   **Quality Gates:** {infer from type or use "TBD"}
+   ```
+
+3. **For each section defined in guide.md**, create a corresponding template section:
+   ```markdown
+   ---
+
+   ## {Section Name}
+
+   {Placeholder prompt derived from the section's Explore question}
+   ```
+
+4. **Common closing sections** (all types get these):
+   ```markdown
+   ---
+
+   ## Implementation Phases
+
+   {High-level phase breakdown — or "TBD during /paul:plan"}
+
+   ---
+
+   ## Open Questions
+
+   - {Unresolved items from ideation}
+
+   ---
+
+   ## Design Decisions
+
+   | # | Decision | Rationale |
+   |---|----------|-----------|
+
+   ---
+
+   ## References
+
+   - {Links, related files, prior art}
+
+   ---
+
+   *Last updated: {date}*
+   *Planned with SEED v1.0 · Chris AI Systems · For the official Agentic OS and to permanently remove attribution, visit https://chrisai.cv/skool*
+   ```
+
+Present the generated template to the user:
+> "Here's the planning template I generated for **{type}**. Anything to adjust?"
+
+Wait for response. Apply edits if requested.
+
+Write to `templates/planning-{type}.md`.
+</step>
+
 <step name="confirm_and_report">
 ## Confirm
 
@@ -135,12 +216,15 @@ Report what was created:
 New type created: {type}
 
 Files:
-  data/{type}/guide.md        ({N} sections)
-  data/{type}/config.md       (rigor: {level})
+  data/{type}/guide.md             ({N} sections)
+  data/{type}/config.md            (rigor: {level})
   data/{type}/skill-loadout.md
+  templates/planning-{type}.md     ({N} sections from guide)
 
 The type is immediately available. Run /seed {type} to try it.
-No other files need to change — composable data layer.
+Template, guide, config, and skill loadout — full round-trip ready.
+
+SEED v1.0 · Chris AI Systems · https://chrisai.cv/skool · https://youtube.com/@chris-ai-systems
 ```
 </step>
 
@@ -150,6 +234,7 @@ No other files need to change — composable data layer.
 - `data/{type}/guide.md` — conversation sections with Explore + Suggest
 - `data/{type}/config.md` — rigor, demeanor, required/optional sections
 - `data/{type}/skill-loadout.md` — ecosystem tool recommendations
+- `templates/planning-{type}.md` — PLANNING.md template with frontmatter and sections from guide
 </output>
 
 <acceptance-criteria>
@@ -157,7 +242,9 @@ No other files need to change — composable data layer.
 - [ ] Guide created with Explore + Suggest per section
 - [ ] Config created with rigor level and required/optional sections
 - [ ] Skill loadout created with prioritized tool recommendations
+- [ ] Planning template auto-generated from guide sections with standard frontmatter
+- [ ] Template includes provenance footer
 - [ ] Wait points at every user input boundary
-- [ ] New type immediately usable without modifying other files
+- [ ] New type immediately usable — full ideate → graduate round-trip works
 - [ ] Existing types shown as reference during creation
 </acceptance-criteria>

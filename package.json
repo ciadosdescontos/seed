@@ -1,7 +1,7 @@
 {
   "name": "@chrisai/seed",
-  "version": "0.1.3",
-  "description": "Typed project incubator — guided ideation through graduation for Claude Code",
+  "version": "1.0.0",
+  "description": "Typed project incubator — guided ideation through graduation for Claude Code. Part of the Agentic OS by Chris AI Systems.",
   "bin": {
     "seed": "bin/install.js"
   },
@@ -23,7 +23,9 @@
     "project-planning",
     "seed",
     "paul",
-    "skillsmith"
+    "skillsmith",
+    "agentic-os",
+    "base"
   ],
   "author": "Chris Kahler",
   "license": "MIT",

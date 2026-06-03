@@ -6,12 +6,12 @@
 **Depth:** required
 
 ## Section 2: Scope Definition
-**Explore:** What components does this include? Commands, skills, CARL domains, hooks, MCP tools, templates? What's the boundary — what does this workflow NOT do?
-**Suggest:** Use a checklist: "Does this need a slash command? A CARL domain? An MCP server? A hook?" Most workflows are 2-3 of these, not all. If they're building all of them, the scope may be too big.
+**Explore:** What components does this include? Commands, skills, BASE domains, hooks, MCP tools, templates? What's the boundary — what does this workflow NOT do?
+**Suggest:** Use a checklist: "Does this need a slash command? A BASE domain? An MCP server? A hook?" Most workflows are 2-3 of these, not all. If they're building all of them, the scope may be too big.
 **Depth:** required
 
 ## Section 3: Integration Map
-**Explore:** What existing systems does this touch? BASE, CARL, PAUL, AEGIS? What files does it read or write? What doesn't it touch?
+**Explore:** What existing systems does this touch? BASE v2, PAUL, Skillsmith? What files does it read or write? What doesn't it touch?
 **Suggest:** Draw the integration map as a table: System | Reads | Writes | Why. If touching more than 3 systems, consider whether this is really one workflow or two.
 **Depth:** required
 

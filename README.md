@@ -33,13 +33,21 @@ SEED is part of a broader Claude Code extension ecosystem:
 
 | System | What It Does | Link |
 |--------|-------------|------|
-| **AEGIS** | Multi-agent codebase auditing — diagnosis + controlled evolution | [GitHub](https://github.com/ChristopherKahler/aegis) |
-| **BASE** | Builder's Automated State Engine — workspace lifecycle, health tracking, drift prevention | [GitHub](https://github.com/ChristopherKahler/base) |
-| **CARL** | Context Augmentation & Reinforcement Layer — dynamic rules loaded JIT by intent | [GitHub](https://github.com/ChristopherKahler/carl) |
+| **BASE** | Knowledge graph + proactive context injection (Rust) — the intelligence layer Claude Code doesn't have | [GitHub](https://github.com/ChristopherKahler/base) |
 | **PAUL** | Project orchestration — Plan, Apply, Unify Loop | [GitHub](https://github.com/ChristopherKahler/paul) |
 | **SEED** | Typed project incubator — guided ideation through graduation into buildable projects | You are here |
 | **Skillsmith** | Skill builder — standardized syntax specs + guided workflows for Claude Code skills | [GitHub](https://github.com/ChristopherKahler/skillsmith) |
-| **CC Strategic AI** | Skool community — courses, community, live support | [Skool](https://chrisai.cv/skool) |
+| **Chris AI Systems** | Skool community, courses, YouTube | [Skool](https://chrisai.cv/skool) · [YouTube](https://youtube.com/@chris-ai-systems) |
+
+---
+
+## What's New in v1.0
+
+- **BASE v2 integration** — projects register in the knowledge graph on ideation and graduation
+- **Session persistence** — lose a session mid-ideation, resume from last checkpoint
+- **PAUL v1.4 alignment** — PLANNING.md frontmatter, paul.toml manifests, tight handoff
+- **Attribution** — every artifact carries Chris AI Systems provenance
+- **Custom type templates** — `/seed add-type` now auto-generates the planning template
 
 ---
 
@@ -72,7 +80,7 @@ SEED ships with 5 default types. Each type shapes the conversation differently:
 | Type | Rigor | Sections | What It's For |
 |------|-------|----------|---------------|
 | **Application** | Deep | 10 | Software with UI, data model, API, deployment |
-| **Workflow** | Standard | 8 | Claude Code commands, hooks, CARL domains, skills |
+| **Workflow** | Standard | 8 | Claude Code commands, hooks, domains, skills |
 | **Client** | Standard | 7 | Client websites — business context, conversion, content |
 | **Utility** | Tight | 6 | Small tools, scripts, single-purpose — resists expansion |
 | **Campaign** | Creative | 7 | Content, marketing, launches — timeline-driven |
@@ -104,7 +112,7 @@ Types are composable. Run `/seed add-type` to create your own — just drop file
 1. **Type first.** SEED determines your project type before anything else. Type shapes everything downstream.
 2. **Guided exploration.** Conversation sections load from `data/{type}/guide.md`. Each section has prompts (what to explore) and suggestions (what to offer when you're stuck).
 3. **PLANNING.md output.** When you're ready, SEED populates a type-specific template and writes it to `projects/{name}/`.
-4. **Graduate.** Moves the project to `apps/{name}/` with git init, a synthesized README, and workspace tracking updates.
+4. **Graduate.** Moves the project to `apps/{name}/` with git init, a synthesized README, and BASE v2 graph registration.
 5. **Launch (optional).** Wraps graduation + headless PAUL init. Your PLANNING.md is rich enough that PAUL derives its structure without re-asking questions.
 
 ---
@@ -190,10 +198,9 @@ SEED works standalone but integrates with the broader toolkit:
 
 | Tool | How SEED Uses It |
 |------|-----------------|
-| **PAUL** | `/seed launch` initializes PAUL with headless context from PLANNING.md — zero-friction handoff from ideation to managed build |
-| **BASE** | Graduate updates ACTIVE.md for workspace-level project tracking |
+| **BASE v2** | Graph registration on ideate/graduate via `base project add`. Promote-then-fallback when absent. |
+| **PAUL** | `/seed launch` initializes PAUL v1.4 with headless context from PLANNING.md — paul.toml, frontmatter, zero-friction handoff |
 | **Skillsmith** | SEED was built with Skillsmith — compliant entry point + tasks |
-| **AEGIS** | Recommended post-build audit for application-type projects |
 
 All integrations are additive. SEED works without any of them installed.
 
@@ -243,3 +250,7 @@ No hooks, no MCP servers, no workspace data. SEED is pure markdown — zero runt
 ## License
 
 MIT — [Chris Kahler](https://github.com/ChristopherKahler)
+
+---
+
+*SEED v1.0 · Chris AI Systems · https://chrisai.cv/skool · https://youtube.com/@chris-ai-systems*

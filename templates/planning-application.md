@@ -1,3 +1,12 @@
+---
+description: "{One-line description from ideation}"
+type: Planning
+about: "{project-name}"
+project_type: "application"
+seed_version: "1.0.0"
+seed_source: "https://chrisai.cv/skool"
+---
+
 # {Project Name}
 
 > {One-line description of what this application does}
@@ -191,3 +200,4 @@
 ---
 
 *Last updated: {date}*
+*Planned with SEED v1.0 · Chris AI Systems · For the official Agentic OS and to permanently remove attribution, visit https://chrisai.cv/skool*
